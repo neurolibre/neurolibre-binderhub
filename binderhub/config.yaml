@@ -1,0 +1,106 @@
+jupyterhub:
+  ingress:
+    enabled: true
+    hosts:
+      - binder.conp.cloud
+    annotations:
+      ingress.kubernetes.io/proxy-body-size: 64m
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: 'true'
+
+  hub:
+    baseUrl: /jupyter/
+    image:
+      name: conpdev/hub-image
+      tag: v1.0
+    extraVolumes:
+    - name: shared-data
+      hostPath:
+        path: /DATA
+    extraVolumeMounts:
+    - name: shared-data
+      mountPath: /srv/jupyterhub/data  # where hub can reach the shared data
+    extraConfig:
+      myExtraConfig: |
+        import os
+        import git
+        import shutil
+        import tempfile 
+        import subprocess
+        from repo2data.repo2data import Repo2Data
+  
+        async def my_pre_spawn_hook(spawner):
+          repo_url = spawner.user_options.get('repo_url')
+          ref = spawner.user_options.get('image').split(':')[-1]  # commit hash
+          # Create temporary dir
+          t = tempfile.mkdtemp()
+          # Clone into temporary dir
+          git.Repo.clone_from(repo_url, t, branch='master', depth=1)
+          exists = os.path.isfile(os.path.join(t, 'binder/data_requirement.json'))
+          exists = (exists and os.path.isfile(os.path.join(t, 'binder/requirements.txt')))
+          if exists:
+            # Copy desired file from temporary dir
+            if os.path.isfile('data_requirement.json'):
+              os.remove('data_requirement.json')
+            if os.path.isfile('requirements.txt'):
+              os.remove('requirements.txt')
+            shutil.move(os.path.join(t, 'binder/data_requirement.json'), '.')
+            shutil.move(os.path.join(t, 'binder/requirements.txt'), '.')
+            Repo2Data().install()
+            os.remove('requirements.txt')
+            os.remove('data_requirement.json')
+  
+          # Remove temporary dir
+          shutil.rmtree(t)
+  
+        c.KubeSpawner.pre_spawn_hook = my_pre_spawn_hook
+
+
+  proxy:
+    service:
+      type: NodePort
+  cull:
+    timeout: 900
+    every: 120
+  singleuser:
+    storage:
+      extraVolumes:
+      - name: shared-data
+        hostPath:
+          path: /DATA
+      extraVolumeMounts:
+      - name: shared-data
+        mountPath: /home/jovyan/data  # where each user can reach shared data
+        readOnly : true
+    memory:
+       guarantee: 4G
+       limit: 6G
+    cpu:
+       guarantee: 1
+       limit: 2
+
+# BinderHub config
+config:
+  BinderHub:
+    hub_url: https://binder.conp.cloud/jupyter
+    use_registry: true
+    image_prefix: conpdev/binder.conp.cloud-
+
+service:
+  type: NodePort
+
+storage:
+  capacity: 2G
+
+ingress:
+  enabled: true
+  hosts:
+    - binder.conp.cloud
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  https:
+    enabled: true
+    type: kube-lego
+  config:
+    # Allow POSTs of upto 64MB, for large notebook support.
+          proxy-body-size: 64m

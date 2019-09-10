@@ -1,0 +1,3 @@
+binderhub/secrets.yaml filter=git-crypt diff=git-crypt
+binderhub/github_access_token filter=git-crypt diff=git-crypt
+terraform/* filter=git-crypt diff=git-crypt
