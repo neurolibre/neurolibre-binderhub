@@ -10,4 +10,4 @@ RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-c
     repo2data \
     scipy \
     scikit-learn \
-    nilearn
+    git+git://github.com/illdopejake/nilearn.git@28048ec192abf6f83bfe95e7049455a63ced36cc 
