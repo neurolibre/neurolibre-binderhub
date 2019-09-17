@@ -12,7 +12,7 @@ jupyterhub:
     baseUrl: /jupyter/
     image:
       name: conpdev/hub-image
-      tag: v1.0
+      tag: v1.1
     extraVolumes:
     - name: shared-data
       hostPath:
