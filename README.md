@@ -30,7 +30,7 @@ List all available nodes
 
 Check CPU usage
 
-`util | grep % | awk '{print \$1}' | awk '{ sum += \$1 } END { if (NR > 0) { result=(sum**4000); printf result/NR \"%\n\" } }`
+`util | grep % | awk '{print \$1}' | awk '{ sum += \$1 } END { if (NR > 0) { result=(sum**4000); printf result/NR \"%\n\" } }'`
 
 Check memory usage
 
@@ -42,7 +42,7 @@ Execute a command inside a pod
 
 Delete a pod
 
-`kubectl delete -n=binderhub`
+`kubectl delete -n=binderhub pod`
 
 Upgrade the binderhub version
 
