@@ -24,6 +24,10 @@ This folder contains all the terraform configuration to set up the binderhub inf
 
 https://github.com/kubernetes/kubernetes/issues/17512
 
+Get all kube namespaces
+
+`kubectl get namespace`
+
 List all available nodes
 
 `kubectl get nodes | grep node | awk '\''{print $1}'\'' | xargs -I {} sh -c '\''echo   {} ; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo '\''`
