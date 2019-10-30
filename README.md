@@ -42,11 +42,11 @@ Check memory usage
 
 Execute a command inside a pod
 
-`kubectl exec -A -it myPod -- /bin/bash`
+`kubectl exec -n=binderhub -it myPod -- /bin/bash`
 
 Delete a pod
 
-`kubectl delete -A pod`
+`kubectl delete -n=binderhub pod`
 
 Upgrade the binderhub version
 
@@ -54,11 +54,11 @@ Upgrade the binderhub version
 
 Get all logs from a pod
 
-`kubectl logs -A`
+`kubectl logs -n=binderhub`
 
 Describe a pod
 
-`kubectl describe pods -A`
+`kubectl describe pods -n=binderhub`
 
 List all pods
 
