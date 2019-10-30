@@ -48,6 +48,9 @@ Delete a pod
 
 `kubectl delete -n=binderhub pod`
 
+Delete ALL pods (from all namespaces, no just binderhub)
+`kubectl get pods --no-headers=true --all-namespaces |sed -r 's/(\S+)\s+(\S+).*/kubectl --namespace \1 delete pod \2/e'`
+
 Upgrade the binderhub version
 
 `sudo helm upgrade binderhub jupyterhub/binderhub --version=v0.2.0-10ac4d8 -f config.yaml -f secrets.yaml`
