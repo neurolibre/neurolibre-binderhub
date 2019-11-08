@@ -2,7 +2,7 @@ jupyterhub:
   ingress:
     enabled: true
     hosts:
-      - binder.conp.cloud
+      - []
     annotations:
       ingress.kubernetes.io/proxy-body-size: 64m
       kubernetes.io/ingress.class: nginx
@@ -11,7 +11,7 @@ jupyterhub:
   hub:
     baseUrl: /jupyter/
     image:
-      name: conpdev/hub-image
+      name: binder-registry.conp.cloud/hub-image
       tag: v1.1
     extraVolumes:
     - name: shared-data
@@ -82,9 +82,9 @@ jupyterhub:
 # BinderHub config
 config:
   BinderHub:
-    hub_url: https://binder.conp.cloud/jupyter
+    hub_url: https://[]/jupyter
     use_registry: true
-    image_prefix: conpdev/binder.conp.cloud-
+    image_prefix: binder-registry.conp.cloud/[]-
 
 service:
   type: NodePort
@@ -95,7 +95,7 @@ storage:
 ingress:
   enabled: true
   hosts:
-    - binder.conp.cloud
+    - []
   annotations:
     kubernetes.io/ingress.class: nginx
   https:
