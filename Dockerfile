@@ -35,4 +35,4 @@ RUN git clone https://github.com/neurolibre/neurolibre-binderhub /neurolibre-bin
 COPY ./entrypoint.bash /
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.bash"]
-CMD ["sh", "-c", "terraform init && terraform plan && terraform apply"]
+CMD ["/bin/sh", "-c", "sudo rm -rf .terraform && sudo rm -f terraform.* && terraform init && terraform plan && terraform apply"]
