@@ -9,7 +9,8 @@ RUN apt-get update && \
 
 RUN adduser --disabled-password --gecos '' ubuntu && adduser ubuntu sudo && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN mkdir -p /terraform-artifacts
+RUN mkdir -p /terraform-artifacts; \
+    mkdir -p /root/.ssh
 
 RUN apt-get install -y --no-install-recommends \
         apt-utils && \
@@ -32,12 +33,6 @@ RUN wget https://releases.hashicorp.com/terraform/0.11.0/terraform_0.11.0_linux_
 RUN git clone https://github.com/neurolibre/neurolibre-binderhub /neurolibre-binderhub/
 
 COPY ./entrypoint.bash /
-
-USER ubuntu
-
-WORKDIR /home/ubuntu/
-
-RUN mkdir -p .ssh
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.bash"]
 CMD ["sh", "-c", "terraform init && terraform plan && terraform apply"]

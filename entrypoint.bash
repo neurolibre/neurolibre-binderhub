@@ -1,14 +1,12 @@
 #!/bin/bash
 set -e
 
-sudo su
-ls -ahl /tmp/.ssh
-cp -R /tmp/.ssh /home/ubuntu/.ssh
+cp -R /tmp/.ssh /root/
 
 cd /neurolibre-binderhub/
-git-crypt unlock /home/ubuntu/.ssh/gitcrypt-key
-source /home/ubuntu/neurolibre-binderhub/terraform/keys_cc.sh
-source /home/ubuntu/neurolibre-binderhub/terraform/rpp-aevans-ab-openrc.sh
+git-crypt unlock /root/.ssh/gitcrypt-key
+source /neurolibre-binderhub/terraform/keys_cc.sh
+source /neurolibre-binderhub/terraform/rpp-aevans-ab-openrc.sh
 
 cd /terraform-artifacts
 if [ ! -f "/terraform-artifacts/main.tf" ]; then
