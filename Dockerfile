@@ -4,15 +4,11 @@ LABEL maintainer="Loic Tetrel <loic.tetrel.pro@gmail.com>"
 
 USER root
 
-RUN apt-get update && \
-      apt-get -y install sudo
-
-RUN adduser --disabled-password --gecos '' ubuntu && adduser ubuntu sudo && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
 RUN mkdir -p /terraform-artifacts; \
     mkdir -p /root/.ssh
 
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update; \
+    apt-get install -y --no-install-recommends \
         apt-utils && \
     apt-get install -y --no-install-recommends \
         sudo \
@@ -35,4 +31,4 @@ RUN git clone https://github.com/neurolibre/neurolibre-binderhub /neurolibre-bin
 COPY ./entrypoint.bash /
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.bash"]
-CMD ["/bin/sh", "-c", "sudo rm -rf .terraform && sudo rm -f terraform.* && terraform init && terraform plan && terraform apply"]
+CMD ["/bin/sh", "-c", "rm -rf .terraform && rm -f terraform.* && terraform init && terraform plan && terraform apply | tee logs"]

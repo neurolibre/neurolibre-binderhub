@@ -16,6 +16,8 @@ if [ ! -f "/terraform-artifacts/main.tf" ]; then
     nano /terraform-artifacts/main.tf
 fi
 
+touch logs
+
 eval `ssh-agent -s`
 ssh-add /root/.ssh/id_rsa
 
