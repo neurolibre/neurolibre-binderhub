@@ -10,4 +10,4 @@ RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-c
     repo2data \
     scipy \
     scikit-learn \
-    nilearn>=5.2 
+    nilearn>0.5.2 
