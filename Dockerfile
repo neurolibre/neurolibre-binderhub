@@ -22,6 +22,8 @@ RUN apt-get update; \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN git clone https://github.com/neurolibre/neurolibre-binderhub /neurolibre-binderhub/
+
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN wget https://releases.hashicorp.com/terraform/0.11.0/terraform_0.11.0_linux_amd64.zip;\
