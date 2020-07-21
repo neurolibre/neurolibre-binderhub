@@ -9,6 +9,6 @@ RUN mkdir /srv/jupyterhub/data
 RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-cache \ 
     repo2data \
     scipy \
-    python-git \
+    gitpython \
     scikit-learn \
-    nilearn>0.5.2 
+    nilearn>=0.5.2 
