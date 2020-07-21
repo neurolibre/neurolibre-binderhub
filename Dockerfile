@@ -14,8 +14,8 @@ RUN apt-get update; \
         sudo \
         ca-certificates \
         openssh-server \
-        git-crypt \
-        unzip \
+        git \
+	unzip \
         wget \
         nano && \
     apt-get clean && \
@@ -27,8 +27,6 @@ RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 RUN wget https://releases.hashicorp.com/terraform/0.11.0/terraform_0.11.0_linux_amd64.zip;\
     unzip ./terraform_0.11.0_linux_amd64.zip -d /usr/local/bin/;\
     rm ./terraform_0.11.0_linux_amd64.zip
-
-RUN git clone https://github.com/neurolibre/neurolibre-binderhub /neurolibre-binderhub/
 
 COPY ./entrypoint.bash /
 

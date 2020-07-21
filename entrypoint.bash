@@ -3,10 +3,9 @@ set -e
 
 cp -R /tmp/.ssh /root/
 
-cd /neurolibre-binderhub/
-git-crypt unlock /root/.ssh/gitcrypt-key
-source /neurolibre-binderhub/terraform/keys_cc.sh
-source /neurolibre-binderhub/terraform/rpp-aevans-ab-openrc.sh
+# openstack and arbutus credentials
+source /terraform-artifacts/keys_cc.sh
+source /terraform-artifacts/*openrc.sh
 
 cd /terraform-artifacts
 if [ ! -f "/terraform-artifacts/main.tf" ]; then
