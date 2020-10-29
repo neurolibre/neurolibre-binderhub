@@ -10,5 +10,5 @@ RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-c
     repo2data==2.1 \
     scipy==1.5.1 \
     GitPython==3.1.11 \
-    sscikit-learn==0.23.1 \
+    scikit-learn==0.23.1 \
     nilearn>=0.5.2 
