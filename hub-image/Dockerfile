@@ -11,4 +11,5 @@ RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-c
     scipy==1.5.1 \
     GitPython==3.1.11 \
     scikit-learn==0.23.1 \
-    nilearn>=0.5.2 
+    nilearn>=0.5.2 \
+    jupyter-book==0.10.1 
