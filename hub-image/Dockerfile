@@ -1,4 +1,4 @@
-FROM jupyterhub/k8s-hub:0.9.1
+FROM jupyterhub/k8s-hub:0.11.1-n128.h35ca170e
 
 # add bin path from pip
 ENV PATH="/home/jovyan/.local/bin:${PATH}"
