@@ -39,10 +39,9 @@ RUN mkdir /srv/jupyterhub/data
 
 # install repo2data and scientific database grabbers
 RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-cache \ 
-    repo2data==2.1 \
+    repo2data==2.2 \
     scipy==1.5.1 \
     GitPython==3.1.11 \
     scikit-learn==0.23.1 \
     nilearn==0.7.1 \
-    docker==5.0.0 \
-    jupyter-book==0.10.1 
+    docker==5.0.0
