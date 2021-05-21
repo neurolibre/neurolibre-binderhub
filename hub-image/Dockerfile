@@ -12,7 +12,6 @@ RUN apt-get update && \
         apt-utils=2.0.5 \
         gnupg=2.2.19-3ubuntu2.1 \
         openssh-server=1:8.2p1-4ubuntu0.2 \
-        git=1:2.25.1-1ubuntu3.1 \
         curl=7.68.0-1ubuntu2.5 && \
     #git-annex for Datalad following neuro.debian.net/ and github.com/jacobalberty/unifi-docker/issues/64
     curl http://neuro.debian.net/lists/buster.us-nh.full -o- | tee /etc/apt/sources.list.d/neurodebian.sources.list && \
