@@ -39,7 +39,7 @@ RUN mkdir /srv/jupyterhub/data
 
 # install repo2data and scientific database grabbers
 RUN python3 -m pip install --upgrade pip && python3 -m pip install --user --no-cache \ 
-    repo2data==2.4.2 \
+    repo2data==2.4.4 \
     scipy==1.5.1 \
     GitPython==3.1.11 \
     scikit-learn==0.23.1 \
