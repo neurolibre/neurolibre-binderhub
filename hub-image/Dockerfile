@@ -1,4 +1,4 @@
-FROM jupyterhub/k8s-hub:0.11.1-n128.h35ca170e
+FROM jupyterhub/k8s-hub:1.1.3-n141.h28efde1b
 
 USER root
 
@@ -11,7 +11,7 @@ RUN apt-get update && \
         apt-utils \
         gnupg \
         openssh-server \
-        git=1:2.25.1-1ubuntu3.1 \
+        git \
         wget \
         curl && \
     #git-annex for Datalad following neuro.debian.net/ and github.com/jacobalberty/unifi-docker/issues/64
