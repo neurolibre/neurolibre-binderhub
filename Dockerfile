@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="Loic Tetrel <loic.tetrel.pro@gmail.com>"
-
 USER root
 
 RUN mkdir -p /terraform-artifacts; \
